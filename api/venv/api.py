@@ -1,5 +1,7 @@
-from flask import Flask
+from flask import Flask, redirect
+from flask import request
 from bs4 import BeautifulSoup
+from flask_cors import CORS, cross_origin
 import requests
 import urllib.request
 import sys
@@ -8,8 +10,10 @@ import pandas as pd
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-def scraper():
+def scraper(query):
     # politifact currently has 638 pages as of 01/15/2021
     model = []
 
@@ -17,48 +21,60 @@ def scraper():
 
         try:
 
-            response = requests.get(
-                "https://www.politifact.com/factchecks/list/?page=" + str(page))
+            url = "https://www.politifact.com/search/factcheck/?q=" + \
+                str(query) + "&page=" + str(page)
+
+            response = requests.get(url)
 
             if response:
 
                 soup = BeautifulSoup(response.text, "html.parser")
 
-                links = soup.find_all('li', attrs={'class': 'o-listicle__item'})
+                links = soup.find_all('div', attrs={'class': 'o-listease__item'})
 
                 for link in links:
 
                     data = {}
 
-                    data["who"] = link.find(
-                        'a', attrs={'class': 'm-statement__name'}).text.strip()
-
                     data["what"] = link.find(
-                        'div', attrs={'class': 'm-statement__quote'}).text.strip()
+                        'div', attrs={'class': 'c-textgroup__title'}).find('a').text.strip()
 
                     meta = link.find(
-                        'div', attrs={'class': 'm-statement__desc'}).text.strip()
+                        'div', attrs={'class': 'c-textgroup__author'}).text.strip()
 
-                    data["when"] = meta[meta.find('on') + 3: meta.find('in') - 1]
+                    data['who'] = meta[:meta.find(' stated ')]
 
-                    data["where"] = meta[meta.find('in') + 3:]
+                    data["when"] = meta[meta.find(
+                        ' on ') + 4: meta.find(' in ')]
+
+                    data["where"] = meta[meta.find(' in ') + 3: -1]
 
                     data["fact-check"] = link.find(
-                        'div', attrs={'class': 'm-statement__meter'}).find('picture').find('img').get('alt')
+                        'img', attrs={'class': 'c-image__original'}).get('src').split('/')[-2][6:]
 
                     model.append(data)
 
         except Exception as e:
-            print(sys.exc_info)
+
+            error_type, error_obj, error_info = sys.exc_info()
+            print('ERROR FOR LINK:', url)
+            print(error_type, 'Line:', error_info.tb_lineno)
 
 
     return model
+
 
 
 @app.route('/api/')
 def api_test():
     return {'message': 'Welcome from Flask'}
 
-@app.route('/api/scrape')
-def api_scrape():
-    return json.dumps(scraper(), indent=4)
+@app.route('/api/scrape/<query>')
+def api_scrape(query):
+    return json.dumps(scraper(query), indent=4)
+
+@app.route('/api/scrape', methods=['POST'])
+def api_scraper():
+    if request.method == 'POST':
+        query = request.form.get('query')
+        return json.dumps(scraper(query), indent=4)
