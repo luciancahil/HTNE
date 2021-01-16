@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+* {
+  background: black;
 }
 
 .App-logo {
@@ -13,14 +13,23 @@
   }
 }
 
+#content{
+  width:80%;
+  margin:auto;
+  padding-top: 200px;
+  top: 50%;
+}
+
+
+#submit-button{
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  margin-top: 20px;
+}
+
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
   color: white;
 }
 
