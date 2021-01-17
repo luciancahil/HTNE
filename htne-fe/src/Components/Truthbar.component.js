@@ -46,8 +46,8 @@ class Truthbar extends React.Component {
     
         return (
             <div id = "truthbar"> 
-                <div style = {this.state.truthPercent} className = "truthRanking" id = "truth">TRUTH</div>
-                <div style = {this.state.falsePercent} className = "truthRanking" id = "false">FALSE</div>
+                <div style = {this.state.truthPercent} className = "truthRanking" id = "truth">AGREE</div>
+                <div style = {this.state.falsePercent} className = "truthRanking" id = "false">DISAGREE</div>
             </div>
         )
   }

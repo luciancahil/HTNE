@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Landing from "./Landing.component";
 import Data from "./Data.component";
+import ArticleBoxes from "./ArticleBoxes.component"
+import data from './data.json'
 
 
 class Userinfo extends React.Component {
@@ -32,6 +34,7 @@ class Userinfo extends React.Component {
           <Route path="/" exact render={(props) => <Landing {...props} setData = {this.setData}/>} />
           <Route path="/data" render={(props) => <Data {...props} setData = {this.setData}/>} />
         </Router>
+        <ArticleBoxes articleTags = {data}/>
       </div>
 
     )

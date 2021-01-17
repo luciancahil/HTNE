@@ -31,6 +31,7 @@
 .App-header {
   text-align: center;
   color: white;
+  border-radius: inherit;
 }
 
 #truthbar{
@@ -64,6 +65,30 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.ArticleBox{
+  border:solid;
+  border-color:green;
+  border-width: 15px;
+  border-radius: 50px;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+#subtext{
+  width:80%;
+  margin:auto;
+  text-align: center;
+  font-size: 200;
+}
+
+.Box-text{
+  color:white;
+  display:inline-block;
+  width:30%;
+  margin:auto;
+  font-size: 30px;
 }
 
 @keyframes App-logo-spin {
