@@ -26,7 +26,6 @@ class Userinfo extends React.Component {
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div id = "content">
         <Router>

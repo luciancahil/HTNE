@@ -4,6 +4,7 @@ import {Form, Button} from 'react-bootstrap';
 import data from './data.json'
 
 
+
 class Landing extends React.Component {
     constructor(props){
         super(props);
@@ -25,11 +26,13 @@ class Landing extends React.Component {
 
     onSubmit(e){
         e.preventDefault();
-        alert(this.state.url);
+        alert(localStorage.getItem("data"));
+        window.location.href = "/data";
+        
     }
 
     componentDidMount(){
-        this.props.setData(data);
+        localStorage.setItem("data", JSON.stringify(data));
     }
 
 

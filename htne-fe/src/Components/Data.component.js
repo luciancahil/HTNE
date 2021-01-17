@@ -16,8 +16,8 @@ class Userinfo extends React.Component {
 
   getScore(){
     let newScore = 0;
-    var data = this.props.info;
-    console.log(this.props.info);
+    var data = JSON.parse(localStorage.getItem("data"));
+    console.log(data);
 
 
     for(let i = 0; i < data.length; i++){
@@ -53,7 +53,6 @@ class Userinfo extends React.Component {
 
 
   render() {
-    console.log("hi");
     console.log("Score: " + (this.state.score / this.state.numEntries));
     return <h2 style={this.state.sty} className = "App-header">Data Page</h2>;
   }
