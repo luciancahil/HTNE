@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Form, Button} from 'react-bootstrap';
+import data from './data.json'
+
 
 class Landing extends React.Component {
     constructor(props){
@@ -25,6 +27,12 @@ class Landing extends React.Component {
         e.preventDefault();
         alert(this.state.url);
     }
+
+    componentDidMount(){
+        this.props.setData(data);
+    }
+
+
   render() {
     return(
         <div id = "Landing Page">

@@ -1,5 +1,4 @@
 import React from 'react';
-import data from './data.json';
 
 class Userinfo extends React.Component {
   constructor(props){
@@ -17,6 +16,9 @@ class Userinfo extends React.Component {
 
   getScore(){
     let newScore = 0;
+    var data = this.props.info;
+    console.log(this.props.info);
+
 
     for(let i = 0; i < data.length; i++){
 
@@ -51,7 +53,7 @@ class Userinfo extends React.Component {
 
 
   render() {
-    
+    console.log("hi");
     console.log("Score: " + (this.state.score / this.state.numEntries));
     return <h2 style={this.state.sty} className = "App-header">Data Page</h2>;
   }
