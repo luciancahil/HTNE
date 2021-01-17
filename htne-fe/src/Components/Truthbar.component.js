@@ -1,10 +1,16 @@
 import React from 'react';
 
-class Userinfo extends React.Component {
+class Truthbar extends React.Component {
   render() {
-    return <h2>User Page</h2>;
+      console.log(this.props.truth)
+    return (
+        <div id = "truthbar"> 
+            <div className = "truthRanking" id = "truth">TRUTH</div>
+            <div className = "truthRanking" id = "false">FALSE</div>
+        </div>
+    )
   }
 }
 
 
-export default Userinfo;
+export default Truthbar;

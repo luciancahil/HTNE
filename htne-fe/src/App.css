@@ -33,6 +33,35 @@
   color: white;
 }
 
+#truthbar{
+  border: solid;
+  border-color: white;
+  height: 50px;
+  border-radius: 20px;
+}
+
+.truthRanking{
+  width:50%;
+  background-color:green;
+  display: inline-block;
+  height:100%;
+  text-align: center;
+  font-size: 30px;
+  overflow: hidden;
+}
+
+#truth{
+  background-color:#66CD00;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+#false{
+  background-color:#990000;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .App-link {
   color: #61dafb;
 }

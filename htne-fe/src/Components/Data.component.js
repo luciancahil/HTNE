@@ -1,4 +1,5 @@
 import React from 'react';
+import Truthbar from './Truthbar.component'
 
 class Userinfo extends React.Component {
   constructor(props){
@@ -17,7 +18,6 @@ class Userinfo extends React.Component {
   getScore(){
     let newScore = 0;
     var data = JSON.parse(localStorage.getItem("data"));
-    console.log(data);
 
 
     for(let i = 0; i < data.length; i++){
@@ -53,8 +53,12 @@ class Userinfo extends React.Component {
 
 
   render() {
-    console.log("Score: " + (this.state.score / this.state.numEntries));
-    return <h2 style={this.state.sty} className = "App-header">Data Page</h2>;
+    return (
+      <div id = "dataPage">
+        <h2 style={this.state.sty} className = "App-header">Truth Rating</h2>
+        <Truthbar truth = {this.state.score / this.state.numEntries}/>
+      </div>
+    )
   }
 }
 
