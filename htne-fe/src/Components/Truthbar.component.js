@@ -5,8 +5,8 @@ class Truthbar extends React.Component {
         super(props);
 
         this.state = {
-            truthPercent: {width: '50%'},
-            falsePercent: {width: '50%'},
+            agreePercent: {width: '50%'},
+            disagreePercent: {width: '50%'},
             dummy: -1
         }
 
@@ -21,21 +21,21 @@ class Truthbar extends React.Component {
 
 
     setPercent(){
-        let tPercent = this.props.truth * 100;
+        let aPercent = this.props.truth * 100;
         
-        if(isNaN(tPercent)){
+        if(isNaN(aPercent)){
             return;
         }
-        let fPercent = 100 - tPercent;
+        let dPercent = 100 - aPercent;
 
-        let tObj = {width: tPercent +"%"}
-        let fObj = {width: fPercent + "%"}
+        let aObj = {width: aPercent +"%"}
+        let dObj = {width: dPercent + "%"}
 
-        if(this.state.dummy !== tPercent){
+        if(this.state.dummy !== aPercent){
             this.setState({
-                truthPercent: tObj,
-                falsePercent: fObj,
-                dummy: tPercent
+                agreePercent: aObj,
+                disagreePercent: dObj,
+                dummy: aPercent
             })
         }
     }
@@ -46,8 +46,8 @@ class Truthbar extends React.Component {
     
         return (
             <div id = "truthbar"> 
-                <div style = {this.state.truthPercent} className = "truthRanking" id = "truth">TRUTH</div>
-                <div style = {this.state.falsePercent} className = "truthRanking" id = "false">FALSE</div>
+                <div style = {this.state.truthPercent} className = "truthRanking" id = "truth">AGREE</div>
+                <div style = {this.state.falsePercent} className = "truthRanking" id = "false">DISAGREE</div>
             </div>
         )
   }
