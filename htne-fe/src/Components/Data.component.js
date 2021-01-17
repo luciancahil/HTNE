@@ -57,7 +57,7 @@ class Userinfo extends React.Component {
     return (
       <div id = "dataPage">
         <h2 style={this.state.sty} className = "App-header">Truth Rating</h2>
-        <Truthbar truth = {this.state.score / this.state.numEntries}/>
+        <Truthbar agreement = {this.state.score / this.state.numEntries}/>
       </div>
     )
   }
