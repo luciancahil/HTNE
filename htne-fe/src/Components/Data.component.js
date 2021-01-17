@@ -7,7 +7,7 @@ class Userinfo extends React.Component {
 
     this.state = {
       score: 0,
-      numEntries: 0,
+      numEntries: 1,
       length: 12,
       sty: {height: '100px'}
     }
@@ -53,6 +53,7 @@ class Userinfo extends React.Component {
 
 
   render() {
+    console.log("Score: " + this.state.score);
     return (
       <div id = "dataPage">
         <h2 style={this.state.sty} className = "App-header">Truth Rating</h2>
