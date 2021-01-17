@@ -8,10 +8,12 @@ import sys
 import time
 import pandas as pd
 import json
+from os import environ
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['FLASK_APP'] = environ.get('FLASK_APP')
 
 def scraper(query):
     # politifact currently has 638 pages as of 01/15/2021
@@ -35,7 +37,7 @@ def scraper(query):
                 for link in links:
 
                     data = {}
-
+                    
                     data["what"] = link.find(
                         'div', attrs={'class': 'c-textgroup__title'}).find('a').text.strip()
 
@@ -49,7 +51,7 @@ def scraper(query):
 
                     data["where"] = meta[meta.find(' in ') + 3: -1]
 
-                    data["fact-check"] = link.find(
+                    data["fact_check"] = link.find(
                         'img', attrs={'class': 'c-image__original'}).get('src').split('/')[-2][6:]
 
                     model.append(data)
@@ -75,6 +77,6 @@ def api_scrape(query):
 
 @app.route('/api/scrape', methods=['POST'])
 def api_scraper():
-    if request.method == 'POST':
-        query = request.form.get('query')
+        query = request.args.get('query')
         return json.dumps(scraper(query), indent=4)
+        
